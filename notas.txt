@@ -1,0 +1,48 @@
+      {/* Trabajo con Images */}
+      <Image
+        source={icon}
+        style={{ width: 100, height: 100, resizeMode: "center" }}
+      />
+      <Image
+        source={{ uri: "https://dellape-porfolio.netlify.app/DP-1.webp" }}
+        style={{ width: 100, height: 100, resizeMode: "center" }}
+      />
+
+      {/* Trabajo con Textos */}
+      <Text style={{ color: "white" }}>Por fin con Eslint!</Text>
+
+      {/* Trabajo con Buttons */}
+      <Button
+        color="#f194ff"
+        title="Soy el botón nativo"
+        onPress={() => alert("Qué tocas?")}
+      />
+
+      <TouchableHighlight
+        onPress={() => alert("No soy un botón nativo")}
+        underlayColor="#00f"
+        style={{ backgroundColor: "#f194ff", padding: 10, borderRadius: 5 }}>
+        <Text style={{ color: "white" }}>
+          Soy un botón que puedo modificar todo
+        </Text>
+      </TouchableHighlight>
+
+      <TouchableOpacity
+        onPress={() => alert("No soy un botón nativo")}
+        style={{ backgroundColor: "#f194ff", padding: 10, borderRadius: 5 }}>
+        <Text style={{ color: "white" }}>
+          Soy un botón que por defecto tine opacidad
+        </Text>
+      </TouchableOpacity>
+
+      <Pressable
+        onPress={() => alert("No soy un botón nativo")}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "#00f" : "#f194ff",
+            padding: 10,
+            borderRadius: 100,
+          },
+        ]}>
+        <Text style={{ color: "white" }}>Soy un botón que tenes que usar</Text>
+      </Pressable>
