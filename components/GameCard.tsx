@@ -1,6 +1,7 @@
+import React, { useEffect, useRef } from "react";
 import { Animated, Image, StyleSheet, Text, View } from "react-native";
 import { Game } from "../lib/metacritic";
-import { useEffect, useRef } from "react";
+import { Score } from "./Score";
 
 interface GameCardProps {
   game: Game;
@@ -11,21 +12,25 @@ interface AnimatedGameCardProps extends GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
+  const lengthFactor = 97;
+  const gameDescription =
+    game.description.length > lengthFactor
+      ? game.description.substring(0, lengthFactor) + "..."
+      : game.description;
+
   return (
-    <View key={game.slug}>
-      <View style={styles.grid}>
-        <Image
-          source={{ uri: game.image }}
-          alt={game.title}
-          style={styles.image}
-        />
-        <View style={styles.col}>
-          <Text style={styles.score}>{game.score}</Text>
-          <Text style={styles.releaseDate}>{game.releaseDate}</Text>
-        </View>
+    <View key={game.slug} style={styles.row}>
+      <Image
+        source={{ uri: game.image }}
+        alt={game.title}
+        style={styles.image}
+      />
+      <View>
+        <Text style={styles.title}>{game.title}</Text>
+        <Text style={styles.releaseDate}>{game.releaseDate}</Text>
+        <Score score={game.score} />
+        <Text style={styles.description}>{gameDescription}</Text>
       </View>
-      <Text style={styles.title}>{game.title}</Text>
-      <Text style={styles.description}>{game.description}</Text>
     </View>
   );
 }
@@ -56,16 +61,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     resizeMode: "stretch",
   },
-  grid: {
+  row: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 10,
-  },
-  col: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-between",
+    padding: 5,
   },
   title: {
     color: "white",
@@ -76,11 +77,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     opacity: 0.9,
-  },
-  score: {
-    color: "green",
-    fontWeight: "bold",
-    fontSize: 20,
   },
   description: {
     color: "white",

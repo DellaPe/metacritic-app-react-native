@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { type Game, getLatestGames } from "../lib/metacritic";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AnimatedGameCard, GameCard } from "./GameCard";
-import { Logo } from "./Logo";
+import { AnimatedGameCard } from "./GameCard";
 
 export function Main() {
   const [games, setGames] = useState<Game[]>([]);
@@ -26,10 +25,6 @@ export function Main() {
         paddingBottom: insets.bottom,
         paddingHorizontal: 10,
       }}>
-      <View style={styles.logo}>
-        <Logo />
-      </View>
-
       {games.length === 0 ? (
         <ActivityIndicator size="large" color="white" />
       ) : (
@@ -44,10 +39,3 @@ export function Main() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-});
